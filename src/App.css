@@ -1,3 +1,9 @@
+
+h1{
+  text-align: center;
+  padding-top: 20px;
+}
+
 .App {
   /* text-align: center; */
   height: 100vh;
@@ -7,20 +13,16 @@
 .formlayout{
   margin: auto;
   width: 50%;
+  border: 3px solid lightblue;
+  border-radius: 10px;
+  padding-top: 20px;
 }
-
-.form{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  background-color: green;
-  padding: 10px ;
-}
-
 
 .multiselect {
   width: 200px;
+  max-height:  75px;
+  overflow-y:scroll; 
+  scrollbar-width: none;
 }
 
 .selectBox {
@@ -30,6 +32,7 @@
 .selectBox select {
   width: 100%;
   font-weight: bold;
+  
 }
 
 .overSelect {
@@ -40,45 +43,31 @@
   bottom: 0;
 }
 
-#checkboxes {
+.submitlayout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.submit{
+  width: 80%;
+  height: 30px;
+  border-radius: 5px;
+}
+
+
+#medCheckboxes, #treatCheckboxes {
   display: none;
   border: 1px #dadada solid;
 }
 
-#checkboxes label {
+#medCheckboxes label, #treatCheckboxes label {
   display: block;
 }
 
-#checkboxes label:hover {
+#medCheckboxes label:hover, #treatCheckboxes label:hover {
   background-color: #1e90ff;
 }
-/* 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-} */
