@@ -216,7 +216,7 @@ function App() {
                         datatype="currency"
                         inputMode="numeric"
                         type="text"
-                        value={costForm != 0 ? `Rp. ${costForm}` : 0}
+                        value={costForm !== 0 ? `Rp. ${costForm}` : 0}
                         onChange={(val) => changeNumber(val.target.value)}
                     />
                 </Form>
