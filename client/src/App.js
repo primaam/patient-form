@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import "./App.css";
 import Loader from "./components/loader/Loader";
 import Form from "./components/form/Form";
@@ -22,6 +23,19 @@ function App() {
 
     const [isLoading, setIsLoading] = React.useState(false);
 
+    React.useEffect(() => {
+        axios({
+            url: "http://localhost:5000/",
+            method: "get",
+        }).then((res) => {
+            if (res) {
+                console.log("success", res.data);
+            } else {
+                console.log("err");
+            }
+        });
+    }, []);
+
     const treatOpt = [
         { id: 1, value: "option 1" },
         { id: 2, value: "option 2" },
@@ -44,6 +58,7 @@ function App() {
 
         return setCostForm(res);
     };
+    // console.log(typeof costForm);
 
     const showCheckboxes = (id) => {
         let treatCheckboxes = document.getElementById("treatCheckboxes");
@@ -83,6 +98,7 @@ function App() {
 
     const handleSubmit = () => {
         setIsLoading(true);
+        let changeType = parseInt(costForm);
 
         if (
             patientNameForm === defaultForm.patientName ||
