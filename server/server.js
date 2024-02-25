@@ -57,6 +57,7 @@ db.query(createTable, (err, res) => {
 
 app.post("/add_patient", (req, res) => {
     const patientDetails = req.body;
+    console.log(patientDetails);
     const sql = `INSERT INTO detail SET ?`;
 
     db.query(sql, patientDetails, (err, result) => {

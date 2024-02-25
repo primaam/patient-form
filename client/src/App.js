@@ -13,6 +13,21 @@ let defaultForm = {
     cost: "",
 };
 
+const treatOpt = [
+    { id: 1, value: "option 1" },
+    { id: 2, value: "option 2" },
+    { id: 3, value: "option 3" },
+    { id: 4, value: "option 4" },
+    { id: 5, value: "option 5" },
+];
+const presribedOpt = [
+    { id: 1, value: "option 1" },
+    { id: 2, value: "option 2" },
+    { id: 3, value: "option 3" },
+    { id: 4, value: "option 4" },
+    { id: 5, value: "option 5" },
+];
+
 function App() {
     const [patientNameForm, setPatientNameForm] = React.useState("");
     const [patientIdForm, setPatientIdForm] = React.useState("");
@@ -23,31 +38,6 @@ function App() {
 
     const [isLoading, setIsLoading] = React.useState(false);
 
-    React.useEffect(() => {
-        axios({
-            url: "http://localhost:5000/",
-            method: "get",
-        }).then((res) => {
-            if (res) {
-                console.log("success", res.data);
-            } else {
-                console.log("err");
-            }
-        });
-    }, []);
-
-    const treatOpt = [
-        { id: 1, value: "option 1" },
-        { id: 2, value: "option 2" },
-        { id: 3, value: "option 3" },
-        { id: 4, value: "option 3" },
-        { id: 5, value: "option 3" },
-    ];
-    const presribedOpt = [
-        { id: 1, value: "option 1" },
-        { id: 2, value: "option 2" },
-        { id: 3, value: "option 3" },
-    ];
     let expanded = {
         treat: false,
         med: false,
@@ -58,7 +48,6 @@ function App() {
 
         return setCostForm(res);
     };
-    // console.log(typeof costForm);
 
     const showCheckboxes = (id) => {
         let treatCheckboxes = document.getElementById("treatCheckboxes");
@@ -98,8 +87,14 @@ function App() {
 
     const handleSubmit = () => {
         setIsLoading(true);
-        let changeType = parseInt(costForm);
-
+        const obj = {
+            patient_name: patientNameForm,
+            patient_id: patientIdForm,
+            date: dateForm,
+            treatment_desc: JSON.stringify(treatDescForm),
+            medic_pres: JSON.stringify(medPrescribedForm),
+            cost: parseInt(costForm),
+        };
         if (
             patientNameForm === defaultForm.patientName ||
             patientIdForm === defaultForm.patientId ||
@@ -109,11 +104,22 @@ function App() {
             costForm === defaultForm.cost
         ) {
             setIsLoading(false);
-            alert("Please fill the form first");
+            alert("Please fill the empty field first");
         } else {
-            setTimeout(() => {
-                setIsLoading(false);
-            }, 2000);
+            axios({
+                url: "http://localhost:5000/add_patient",
+                method: "post",
+                data: obj,
+            }).then((res) => {
+                if (res) {
+                    setTimeout(() => {
+                        setIsLoading(false);
+                    });
+                    console.log("success");
+                } else {
+                    setIsLoading(false);
+                }
+            });
         }
     };
 
