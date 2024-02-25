@@ -13,18 +13,18 @@ After you clone the repo, here is some step
 
 -   go to frontend side at client folder and run this
 
-### `cd client && npm i`
+`cd client && npm i`
 
 -   after that, go to backend side at server folder and run this
 
-### `cd ../server && npm i`
+`cd ../server && npm i`
 
 2. if installation proccess is finish, you can run the app with this:
 
 -   go to client folder and run this
 
-### `npm start`
+`npm start`
 
 -   to run backend, make sure mysql server is running. after that, go to server folder and run this:
 
-### `node server.js`
+`node server.js`
