@@ -10,6 +10,28 @@ h1{
   width: 100vw;
 }
 
+.listlayout{
+  margin: auto;
+  width: 50%;
+  padding-top: 50px;
+}
+
+.table{
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.tableheader{
+  border: 1px solid #dddddd;
+  text-align: left;
+  height: 50px;
+}
+
+/* .tableheader:th{
+  border: 1px solid #dddddd;
+} */
+
 .formlayout{
   margin: auto;
   width: 50%;

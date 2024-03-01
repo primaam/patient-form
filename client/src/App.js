@@ -4,6 +4,9 @@ import "./App.css";
 import Loader from "./components/loader/Loader";
 import Form from "./components/form/Form";
 
+// update learning
+import { patientDataList } from "./util/FakeData";
+
 let defaultForm = {
     patientName: "",
     patientId: "",
@@ -37,11 +40,23 @@ function App() {
     const [costForm, setCostForm] = React.useState("");
 
     const [isLoading, setIsLoading] = React.useState(false);
+    // update
+    const [list, setList] = React.useState([]);
 
     let expanded = {
         treat: false,
         med: false,
     };
+
+    React.useEffect(() => {
+        axios({
+            url: "http://localhost:5000/",
+            method: "get",
+        }).then((res) => {
+            console.log(res.data);
+            setList(res.data);
+        });
+    }, []);
 
     const changeNumber = (num, prefix) => {
         let res = num.replace(/\D/g, "").toString();
@@ -113,8 +128,16 @@ function App() {
             }).then((res) => {
                 if (res) {
                     setTimeout(() => {
+                        axios({
+                            url: "http://localhost:5000/",
+                            method: "get",
+                        }).then((res) => {
+                            console.log(res.data);
+                            setList(res.data);
+                        });
+
                         setIsLoading(false);
-                    });
+                    }, 3000);
                     console.log("success");
                 } else {
                     setIsLoading(false);
@@ -251,6 +274,40 @@ function App() {
                         <input className="submit" type="submit" onClick={() => handleSubmit()} />
                     )}
                 </div>
+            </div>
+            <div className="listlayout">
+                <table className="table">
+                    <thead>
+                        <tr className="tableheader">
+                            <th>No</th>
+                            <th>Patient Name</th>
+                            <th>Patient ID</th>
+                            <th>{`Cost (Rp)`}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {list.length > 0 ? (
+                            list.map((item, i) => {
+                                return (
+                                    <tr key={i}>
+                                        <td>{i + 1}</td>
+                                        <td>{item.patient_name}</td>
+                                        <td>{item.patient_id}</td>
+                                        <td style={{ textAlign: "right" }}>
+                                            {item.cost.toLocaleString("id-ID", {
+                                                style: "currency",
+                                                currency: "IDR",
+                                            })}
+                                        </td>
+                                    </tr>
+                                );
+                            })
+                        ) : (
+                            <tr></tr>
+                        )}
+                    </tbody>
+                    <tfoot></tfoot>
+                </table>
             </div>
         </div>
     );

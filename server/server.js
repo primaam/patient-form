@@ -57,7 +57,6 @@ db.query(createTable, (err, res) => {
 
 app.post("/add_patient", (req, res) => {
     const patientDetails = req.body;
-    console.log(patientDetails);
     const sql = `INSERT INTO detail SET ?`;
 
     db.query(sql, patientDetails, (err, result) => {
@@ -67,10 +66,11 @@ app.post("/add_patient", (req, res) => {
 });
 
 app.get("/", (req, res) => {
-    const query = `SELECT * FROM detail`;
+    const query = `SELECT * FROM detail ORDER BY id DESC`;
 
     db.query(query, (err, result) => {
         if (err) throw err;
+        console.log(result);
         res.send(JSON.stringify(result));
     });
 });
