@@ -66,7 +66,7 @@ app.post("/add_patient", (req, res) => {
 });
 
 app.get("/", (req, res) => {
-    const query = `SELECT * FROM detail ORDER BY id DESC`;
+    const query = `SELECT * FROM detail ORDER BY id DESC LIMIT 5`;
 
     db.query(query, (err, result) => {
         if (err) throw err;
